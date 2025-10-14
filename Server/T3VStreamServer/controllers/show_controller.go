@@ -29,8 +29,9 @@ func GetShows() gin.HandlerFunc {
 
 		defer cursor.Close(ctx)
 
-		if err = cursor.All(ctx, &shows); err != nil {
+		if err := cursor.All(ctx, &shows); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to decode shows."})
+			return
 		}
 
 		c.JSON(http.StatusOK, shows)
