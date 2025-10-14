@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -37,4 +38,38 @@ func GetShows() gin.HandlerFunc {
 		c.JSON(http.StatusOK, shows)
 	}
 
+}
+
+func GetOneShow() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+
+		showIDStr := c.Param("show_id")
+		if showIDStr == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Show ID is required."})
+			return
+		}
+
+		// Convert string to int
+		showID, err := strconv.Atoi(showIDStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Show ID must be a number."})
+			return
+		}
+
+		var show models.Show
+
+		err = showCollection.FindOne(ctx, bson.M{"show_id": showID}).Decode(&show)
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				c.JSON(http.StatusNotFound, gin.H{"error": "Show not found."})
+				return
+			}
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error."})
+			return
+		}
+
+		c.JSON(http.StatusOK, show)
+	}
 }
