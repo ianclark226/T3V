@@ -4,9 +4,9 @@ import (
 	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
-type Genre struct {
-	GenreID   int    `bson:"genre_id" json:"genre_id" validate:"required"`
-	GenreName string `bson:"genre_name" json:"genre_name" validate:"required,min=2,max=100"`
+type Channel struct {
+	ChannelID   int    `bson:"channel_id" json:"channel_id" validate:"required"`
+	ChannelName string `bson:"channel_name" json:"channel_name" validate:"required,min=2,max=100"`
 }
 
 type Ranking struct {
@@ -29,7 +29,7 @@ type Show struct {
 	ShowID      int           `bson:"show_id" json:"show_id"`
 	Title       string        `bson:"title" json:"title" validate:"required,min=2,max=500"`
 	PosterPath  string        `bson:"poster_path" json:"poster_path" validate:"required,url"`
-	Genre       []Genre       `bson:"genre" json:"genre" validate:"required,dive"`
+	Channel     []Channel     `bson:"channel" json:"channel" validate:"required,dive"`
 	AdminReview string        `bson:"admin_review" json:"admin_review"`
 	Ranking     Ranking       `bson:"ranking" json:"ranking" validate:"required"`
 	Episodes    []Episode     `bson:"episodes" json:"episodes,omitempty"`

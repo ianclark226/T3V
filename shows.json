@@ -3,10 +3,10 @@
     "show_id": 1,
     "title": "Hey Arnold",
     "poster_path": "https://m.media-amazon.com/images/S/pv-target-images/6b421dad55e6c5ef9dfd85684e7e3921790e0a51f26c6f5d3fa9c2f014e725a1._SX1080_FMjpg_.jpg",
-    "genre": [
+    "channel": [
       {
-        "genre_id": 7,
-        "genre_name": "Nickalodeon"
+        "channel_id": 7,
+        "channel_name": "Nickalodeon"
       }
     ],
     "admin_review": "I loved the acting in this movie. It was absolutely sublime!",
@@ -35,10 +35,10 @@
     "show_id": 2,
     "title": "Rugrats",
     "poster_path": "https://m.media-amazon.com/images/M/MV5BOTkwZWRjZjktMDQyMy00MjljLWIzMmMtMjc2OTNiNGY2YzkzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-    "genre": [
+    "channel": [
       {
-        "genre_id": 7,
-        "genre_name": "Nickalodeon"
+        "channel_id": 7,
+        "channel_name": "Nickalodeon"
       }
     ],
     "admin_review": "I loved the acting in this movie. It was absolutely sublime!",
@@ -67,10 +67,10 @@
     "show_id": 3,
     "title": "Dilbert",
     "poster_path": "https://m.media-amazon.com/images/M/MV5BNGJhY2JiMTgtNjlmYS00YWE3LThlNzYtNmE1OTQ2YjBhYTBkXkEyXkFqcGc@._V1_.jpg",
-    "genre": [
+    "channel": [
       {
-        "genre_id": 1,
-        "genre_name": "CBS"
+        "channel_id": 1,
+        "channel_name": "CBS"
       }
     ],
     "admin_review": "A sharp, witty take on corporate culture — the perfect adaptation of Scott Adams’ satirical comic strip.",
@@ -99,10 +99,10 @@
     "show_id": 4,
     "title": "Winx Club",
     "poster_path": "https://static.wikia.nocookie.net/thewinx/images/4/4d/Il-destino-di-bloom.png/revision/latest?cb=20211010184200",
-    "genre": [
+    "channel": [
       {
-        "genre_id": 4,
-        "genre_name": "Fox"
+        "channel_id": 4,
+        "channel_name": "Fox"
       }
     ],
     "admin_review": "Colorful, magical, and full of heart — a timeless mix of friendship, fantasy, and fashion that defined early 2000s animation.",

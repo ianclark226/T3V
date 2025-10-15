@@ -18,6 +18,7 @@ func main() {
 	router.GET("/shows", controller.GetShows())
 	router.GET("/show/:show_id", controller.GetOneShow())
 	router.POST("/add-show", controller.AddShow())
+	router.POST("/register", controller.RegisterUser())
 
 	if err := router.Run(":8080"); err != nil {
 		fmt.Println("Failed to start server", err)
