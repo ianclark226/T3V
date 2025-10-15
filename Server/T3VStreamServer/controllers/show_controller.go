@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"github.com/ianclark226/T3V/Server/T3VStreamServer/database"
 	"github.com/ianclark226/T3V/Server/T3VStreamServer/models"
 	"go.mongodb.org/mongo-driver/v2/bson"
@@ -14,6 +15,8 @@ import (
 )
 
 var showCollection *mongo.Collection = database.OpenCollection("shows")
+
+var validate = validator.New()
 
 func GetShows() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -71,5 +74,33 @@ func GetOneShow() gin.HandlerFunc {
 		}
 
 		c.JSON(http.StatusOK, show)
+	}
+}
+
+func AddShow() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
+		defer cancel()
+
+		var show models.Show
+
+		if err := c.ShouldBindJSON(&show); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Input"})
+			return
+		}
+
+		if err := validate.Struct(show); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Validation Failed", "details": err.Error()})
+			return
+		}
+
+		result, err := showCollection.InsertOne(ctx, show)
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to add Show"})
+			return
+		}
+
+		c.JSON(http.StatusCreated, result)
 	}
 }
