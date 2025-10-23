@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	controller "github.com/ianclark226/T3V/Server/T3VStreamServer/controllers"
+	"github.com/ianclark226/T3V/Server/T3VStreamServer/routes"
 )
 
 func main() {
@@ -15,11 +15,8 @@ func main() {
 		c.String(200, "Hello, T3V")
 	})
 
-	router.GET("/shows", controller.GetShows())
-	router.GET("/show/:show_id", controller.GetOneShow())
-	router.POST("/add-show", controller.AddShow())
-	router.POST("/register", controller.RegisterUser())
-	router.POST("/login", controller.LoginUser())
+	routes.SetupUnprotectedRoutes(router)
+	routes.SetupProtectedRoutes(router)
 
 	// Example: only trust local proxy or internal network
 	router.SetTrustedProxies([]string{"127.0.0.1", "::1"})
