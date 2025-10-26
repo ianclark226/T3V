@@ -11,4 +11,6 @@ func SetupProtectedRoutes(router *gin.Engine) {
 
 	router.GET("/show/:show_id", controller.GetOneShow())
 	router.POST("/add-show", controller.AddShow())
+	router.GET("/recommended-shows", controller.GetRecommendedShows())
+	router.PATCH("/update-review/:show_id", controller.AdminReviewUpdate())
 }

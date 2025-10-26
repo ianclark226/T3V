@@ -3,7 +3,7 @@
         "user_id": "68385b9981097c6b4042dab4",
         "first_name": "Ian",
         "last_name": "Clark",
-        "email": "ianclark226@gmail.com.com",
+        "email": "ianclark226@gmail.com",
         "password": "Warpmaster#7",
         "role": "ADMIN",
         "created_at": {
@@ -14,7 +14,7 @@
         },
         "token": "",
         "refresh_token": "",
-        "favourite_channels": [
+        "favorite_channels": [
             {
                 "channel_id": 7,
                 "channel_name": "Nickalodeon"
@@ -40,7 +40,7 @@
         },
         "token": "",
         "refresh_token": "",
-        "favourite_channels": [
+        "favorite_channels": [
             {
                 "channel_id": 5,
                 "channel_name": "Abc Family"
@@ -70,7 +70,7 @@
         },
         "token": "",
         "refresh_token": "",
-        "favourite_channels": [
+        "favorite_channels": [
             {
                 "channel_id": 1,
                 "channel_name": "Nickalodeon"
