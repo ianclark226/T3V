@@ -391,7 +391,7 @@ func GetChannels(client *mongo.Client) gin.HandlerFunc {
 
 		var channelCollection *mongo.Collection = database.OpenCollection("channels", client)
 
-		cursor, err := channelCollection.Find(ctx, bson.D{})
+		cursor, err := channelCollection.Find(ctx, bson.M{})
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching movie channels"})
 			return
