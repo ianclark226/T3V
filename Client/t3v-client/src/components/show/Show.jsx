@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button'
 
-const Show = ({show}) => {
+const Show = ({show, updateShowReview}) => {
   return (
     <div className="col-md-4 mb-4">
         <div className="card h-100 shadow-sm">
@@ -22,6 +22,18 @@ const Show = ({show}) => {
                 <span className="badge bg-dark m-3 p-2" style={{fontSize:"1rem"}}>
                     {show.ranking.ranking_name}
                 </span>
+            )}
+            {updateShowReview && (
+                <Button
+                variant='outline-info'
+                onClick={e => {
+                    e.preventDefault();
+                    updateShowReview(show.show_id)
+                }}
+                className='m-3'
+                >
+                    Review
+                </Button>
             )}
         </div>
     </div>

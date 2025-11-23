@@ -11,6 +11,13 @@ const Header = () => {
     const navigate = useNavigate()
     const {auth} = useAuth()
 
+    const handleRecommendedClick = (e) => {
+        if (!auth) {
+            e.preventDefault() // stop normal navigation
+            navigate('/login') // redirect to login
+        }
+    }
+
     return (
         <Navbar bg="dark" variant='dark' expand='lg' sticky='top' className='shadow-sm'>
             <Container>
@@ -23,7 +30,7 @@ const Header = () => {
                     <Nav.Link as={NavLink} to="/">
                         Home
                     </Nav.Link>
-                    <Nav.Link as={NavLink} to="/recommended">
+                    <Nav.Link as={NavLink} to="/recommended" onClick={handleRecommendedClick}>
                         Recommended
                     </Nav.Link>
                 </Nav>
@@ -31,7 +38,7 @@ const Header = () => {
                 {auth ? (
                     <>
                         <span>
-                            Hello, <strong>Name</strong>
+                            Hello, <strong>{auth.first_name}</strong>
                         </span>
                         <Button variant='outline-light' size='sm'>
                             Logout
