@@ -26,7 +26,7 @@ function App() {
       const response = await axiosConfig.post("/logout", {user_id: auth.user_id})
       console.log(response.data)
       setAuth(null)
-      localStorage.removeItem('user')
+      // localStorage.removeItem('user')
       console.log("User Logged out")
       navigate("/login")
 
@@ -38,7 +38,6 @@ function App() {
   return (
     <>
     <Header handleLogout={handleLogout} />
-      {/* <Header handleLogout = {handleLogout}/> */}
       <Routes path="/" element = {<Layout/>}>
         <Route path="/" element={<Home updateShowReview={updateShowReview}/>}></Route>
         <Route path="/register" element={<Register/>}></Route>

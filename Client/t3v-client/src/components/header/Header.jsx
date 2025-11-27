@@ -11,13 +11,6 @@ const Header = ({handleLogout}) => {
     const navigate = useNavigate()
     const {auth} = useAuth()
 
-    const handleRecommendedClick = (e) => {
-        if (!auth) {
-            e.preventDefault() 
-            navigate('/login') 
-        }
-    }
-
     return (
         <Navbar bg="dark" variant='dark' expand='lg' sticky='top' className='shadow-sm'>
             <Container>
@@ -30,14 +23,14 @@ const Header = ({handleLogout}) => {
                     <Nav.Link as={NavLink} to="/">
                         Home
                     </Nav.Link>
-                    <Nav.Link as={NavLink} to="/recommended" onClick={handleRecommendedClick}>
+                    <Nav.Link as={NavLink} to="/recommended">
                         Recommended
                     </Nav.Link>
                 </Nav>
             <Nav className='ms-auto align-items-center'>
                 {auth ? (
                     <>
-                        <span>
+                        <span className='m-3 text-light'>
                             Hello, <strong>{auth.first_name}</strong>
                         </span>
                         <Button variant='outline-light' size='sm' onClick={handleLogout}>
