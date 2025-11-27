@@ -9,17 +9,35 @@ import Layout from './components/Layout'
 import RequiredAuth from './components/RequiredAuth'
 import Recommended from './components/recommended/Recommended'
 import Review from './components/review/Review'
+import axiosConfig from './api/axiosConfig'
+import useAuth from './hook/useAuth'
 
 function App() {
 
   const navigate = useNavigate()
+  const {auth, setAuth} = useAuth()
   const updateShowReview = (show_id) => {
   navigate(`/review/${show_id}`)
 }
 
+  const handleLogout = async() => {
+
+    try {
+      const response = await axiosConfig.post("/logout", {user_id: auth.user_id})
+      console.log(response.data)
+      setAuth(null)
+      localStorage.removeItem('user')
+      console.log("User Logged out")
+      navigate("/login")
+
+    } catch(error) {
+      console.error("Error logging out:", error)
+    }
+  }
+
   return (
     <>
-    <Header />
+    <Header handleLogout={handleLogout} />
       {/* <Header handleLogout = {handleLogout}/> */}
       <Routes path="/" element = {<Layout/>}>
         <Route path="/" element={<Home updateShowReview={updateShowReview}/>}></Route>

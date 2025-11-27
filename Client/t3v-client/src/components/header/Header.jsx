@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import useAuth from '../../hook/useAuth'
 
 
-const Header = () => {
+const Header = ({handleLogout}) => {
     const navigate = useNavigate()
     const {auth} = useAuth()
 
@@ -40,7 +40,7 @@ const Header = () => {
                         <span>
                             Hello, <strong>{auth.first_name}</strong>
                         </span>
-                        <Button variant='outline-light' size='sm'>
+                        <Button variant='outline-light' size='sm' onClick={handleLogout}>
                             Logout
                         </Button>
 
