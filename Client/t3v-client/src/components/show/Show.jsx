@@ -1,6 +1,21 @@
 import Button from 'react-bootstrap/Button'
+import useAuth from '../../hook/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 const Show = ({show, updateShowReview}) => {
+
+    const navigate = useNavigate()
+    const { auth } = useAuth()
+
+    const handleReviewClick = (e) => {
+        if(!auth) {
+            navigate('/login')
+            return
+        }
+
+        updateShowReview(show.show_id)
+    }
+
   return (
     <div className="col-md-4 mb-4">
         <div className="card h-100 shadow-sm">
@@ -26,10 +41,7 @@ const Show = ({show, updateShowReview}) => {
             {updateShowReview && (
                 <Button
                 variant='outline-info'
-                onClick={e => {
-                    e.preventDefault();
-                    updateShowReview(show.show_id)
-                }}
+                onClick={handleReviewClick}
                 className='m-3'
                 >
                     Review

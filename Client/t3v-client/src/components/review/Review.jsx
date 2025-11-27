@@ -40,7 +40,7 @@ const Review = () => {
         setLoading(true);
         try {
             
-            const response = await axiosPrivate.patch(`/updatereview/${show_id}`, { admin_review: revText.current.value });
+            const response = await axiosPrivate.patch(`/update-review/${show_id}`, { admin_review: revText.current.value });
             console.log(response.data);           
 
             setShow(() => ({

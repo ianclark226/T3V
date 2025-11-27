@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import axiosConfig from "../../api/axiosConfig"
 import Shows from "../shows/shows"
 
-const Home = () => {
+const Home = ({updateShowReview}) => {
     const [shows, setShows] = useState([])
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
@@ -32,7 +32,7 @@ const Home = () => {
       {loading ? (
         <h2>Loading...</h2>
       ) : (
-        <Shows shows={shows} message={message}/>
+        <Shows shows={shows} message={message} updateShowReview={updateShowReview} />
       )}
     </>
   )

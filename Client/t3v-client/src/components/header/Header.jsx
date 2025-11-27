@@ -13,8 +13,8 @@ const Header = () => {
 
     const handleRecommendedClick = (e) => {
         if (!auth) {
-            e.preventDefault() // stop normal navigation
-            navigate('/login') // redirect to login
+            e.preventDefault() 
+            navigate('/login') 
         }
     }
 
