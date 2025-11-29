@@ -11,6 +11,7 @@ func SetupProtectedRoutes(router *gin.Engine, client *mongo.Client) {
 	router.Use(middleware.AuthMiddleWare())
 
 	router.GET("/show/:show_id", controller.GetOneShow(client))
+	router.GET("/shows/:show_id/episodes", controller.GetEpisodes(client))
 	router.POST("/add-show", controller.AddShow(client))
 	router.GET("/recommended-shows", controller.GetRecommendedShows(client))
 	router.PATCH("/update-review/:show_id", controller.AdminReviewUpdate(client))

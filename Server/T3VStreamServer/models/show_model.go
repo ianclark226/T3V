@@ -1,9 +1,5 @@
 package models
 
-import (
-	"go.mongodb.org/mongo-driver/v2/bson"
-)
-
 type Channel struct {
 	ChannelID   int    `bson:"channel_id" json:"channel_id" validate:"required"`
 	ChannelName string `bson:"channel_name" json:"channel_name" validate:"required,min=2,max=100"`
@@ -14,23 +10,19 @@ type Ranking struct {
 	RankingName  string `bson:"ranking_name" json:"ranking_name" validate:"required"`
 }
 
-type Episode struct {
-	ID            bson.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	ShowID        bson.ObjectID `bson:"show_id,omitempty" json:"show_id,omitempty"`
-	EpisodeNumber int           `bson:"episode_number" json:"episode_number"`
-	Title         string        `bson:"title" json:"title"`
-	Description   string        `bson:"description" json:"description"`
-	AirDate       string        `bson:"air_date" json:"air_date"`
-	Duration      int           `bson:"duration_minutes" json:"duration_minutes"`
-}
+// type Episode struct {
+// 	ID            bson.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
+// 	ShowID        bson.ObjectID `bson:"show_id,omitempty" json:"show_id,omitempty"`
+// 	EpisodeNumber int           `bson:"episode_number" json:"episode_number"`
+// 	Title         string        `bson:"title" json:"title"`
+// 	Description   string        `bson:"description" json:"description"`
+// 	AirDate       string        `bson:"air_date" json:"air_date"`
+// 	Duration      int           `bson:"duration_minutes" json:"duration_minutes"`
+// }
 
 type Show struct {
-	ID          bson.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	ShowID      int           `bson:"show_id" json:"show_id"`
-	Title       string        `bson:"title" json:"title" validate:"required,min=2,max=500"`
-	PosterPath  string        `bson:"poster_path" json:"poster_path" validate:"required,url"`
-	Channel     []Channel     `bson:"channel" json:"channel" validate:"required,dive"`
-	AdminReview string        `bson:"admin_review" json:"admin_review"`
-	Ranking     Ranking       `bson:"ranking" json:"ranking" validate:"required"`
-	Episodes    []Episode     `bson:"episodes" json:"episodes,omitempty"`
+	ShowID      int    `json:"show_id" bson:"show_id"`
+	Title       string `json:"title" bson:"title"`
+	PosterPath  string `json:"poster_path" bson:"poster_path"`
+	AdminReview string `json:"admin_review" bson:"admin_review"`
 }

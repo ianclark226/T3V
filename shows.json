@@ -13,23 +13,7 @@
     "ranking": {
       "ranking_value": 1,
       "ranking_name": "Excellent"
-    },
-    "episodes": [
-      {
-        "episode_number": 1,
-        "title": "Downtown as Fruits",
-        "description": "Arnold and Gerald perform in a play about fruits, but Helga takes her role too seriously.",
-        "air_date": "1996-10-07",
-        "duration_minutes": 22
-      },
-      {
-        "episode_number": 2,
-        "title": "Eugene’s Bike",
-        "description": "Arnold accidentally destroys Eugene’s new bike and tries to make it up to him.",
-        "air_date": "1996-10-14",
-        "duration_minutes": 22
-      }
-    ]
+    }
   },
   {
     "show_id": 2,
@@ -45,23 +29,7 @@
     "ranking": {
       "ranking_value": 1,
       "ranking_name": "Excellent"
-    },
-    "episodes": [
-      {
-        "episode_number": 2,
-        "title": "Barbeque Story",
-        "description": "At a family barbecue, Tommy escapes his playpen to sample some real food, leading to chaos in the backyard.",
-        "air_date": "1991-08-18",
-        "duration_minutes": 22
-      },
-      {
-        "episode_number": 3,
-        "title": "Waiter, There's a Baby in My Soup",
-        "description": "Stu and Didi take Tommy to an elegant restaurant, but the babies’ curiosity turns dinner into disaster.",
-        "air_date": "1991-08-25",
-        "duration_minutes": 22
-      }
-    ]
+    }
   },
   {
     "show_id": 3,
@@ -77,23 +45,7 @@
     "ranking": {
       "ranking_value": 3,
       "ranking_name": "Good"
-    },
-    "episodes": [
-      {
-        "episode_number": 1,
-        "title": "The Name",
-        "description": "Dilbert tries to create a new product for his company, but chaos ensues when management decides to let marketing pick the name.",
-        "air_date": "1999-01-25",
-        "duration_minutes": 22
-      },
-      {
-        "episode_number": 2,
-        "title": "The Prototype",
-        "description": "Dilbert and his team struggle to build a prototype for their new product while the company’s bureaucracy spirals out of control.",
-        "air_date": "1999-02-01",
-        "duration_minutes": 22
-      }
-    ]
+    }
   },
   {
     "show_id": 4,
@@ -109,22 +61,6 @@
     "ranking": {
       "ranking_value": 4,
       "ranking_name": "Great"
-    },
-    "episodes": [
-      {
-        "episode_number": 1,
-        "title": "It Feels Like Magic",
-        "description": "Bloom, an ordinary Earth girl, discovers she has magical powers when she saves Stella, a fairy princess from Solaria, from an ogre attack.",
-        "air_date": "2004-01-28",
-        "duration_minutes": 24
-      },
-      {
-        "episode_number": 2,
-        "title": "Welcome to Magix!",
-        "description": "After discovering her powers, Bloom travels with Stella to the magical realm of Magix and enrolls at Alfea, the college for fairies.",
-        "air_date": "2004-01-29",
-        "duration_minutes": 24
-      }
-    ]
+    }
   }
 ]

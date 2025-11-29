@@ -11,6 +11,7 @@ import Recommended from './components/recommended/Recommended'
 import Review from './components/review/Review'
 import axiosConfig from './api/axiosConfig'
 import useAuth from './hook/useAuth'
+import EpisodeListPage from './components/episode-list-page/EpisodeListPage'
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
         <Route element = {<RequiredAuth/>}>
             <Route path="/recommended" element={<Recommended/>}></Route>
             <Route path="/review/:show_id" element={<Review/>}></Route>
+            <Route path="shows/:show_id/episodes" element={<EpisodeListPage/>}></Route>
             {/* <Route path="/stream/:yt_id" element={<StreamMovie/>}></Route> */}
         </Route>
       </Routes>

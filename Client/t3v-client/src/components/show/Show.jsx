@@ -16,6 +16,10 @@ const Show = ({show, updateShowReview}) => {
         updateShowReview(show.show_id)
     }
 
+    const goToEpisodes = () => {
+        navigate(`/shows/${show.show_id}/episodes`)
+    }
+
   return (
     <div className="col-md-4 mb-4">
         <div className="card h-100 shadow-sm">
@@ -31,7 +35,6 @@ const Show = ({show, updateShowReview}) => {
             </div>
             <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{show.title}</h5>
-                <p className="card-text mb-2">{show.show_id}</p>
             </div>
             {show.ranking?.ranking_name && (
                 <span className="badge bg-dark m-3 p-2" style={{fontSize:"1rem"}}>
@@ -47,6 +50,16 @@ const Show = ({show, updateShowReview}) => {
                     Review
                 </Button>
             )}
+                    <h5 onClick={goToEpisodes} style={{ cursor: "pointer" }}>
+                    </h5>
+                
+
+                <Button
+                    className="btn btn-info m-3"
+                    onClick={goToEpisodes}
+                >
+                    View Episodes
+                </Button>
         </div>
     </div>
   )

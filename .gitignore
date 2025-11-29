@@ -1,1 +1,6 @@
 .env
+channels.json
+episodes.json
+rating.json
+shows.json
+users.json
