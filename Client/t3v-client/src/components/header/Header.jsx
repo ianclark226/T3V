@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import useAuth from '../../hook/useAuth'
+import logo from '../../assets/T3VLogo.jpg'
 
 
 const Header = ({handleLogout}) => {
@@ -15,6 +16,12 @@ const Header = ({handleLogout}) => {
         <Navbar bg="dark" variant='dark' expand='lg' sticky='top' className='shadow-sm'>
             <Container>
                 <Navbar.Brand>
+                    <img
+                    alt='T3V Tab Logo'
+                    src={logo}
+                    width="30"
+                    height="30"
+                    className='d-inline-block align-top me-2'/>
                     T3V Streaming
                 </Navbar.Brand>
             <Navbar.Toggle aria-controls='main-navbar-nav' />

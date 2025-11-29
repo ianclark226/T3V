@@ -1,5 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCirclePlay } from '@fortawesome/free-solid-svg-icons'
+import './Episode.css'
 
 const Episode = ({ episode }) => {
   return (
@@ -8,7 +11,7 @@ const Episode = ({ episode }) => {
         to={`/stream/${episode.website_id}`} 
         style={{ textDecoration: "none", color: "inherit" }}
       >
-      <div className="card h-100 shadow-sm">
+      <div className="card h-100 shadow-sm show-card">
         <div style={{ position: "relative" }}>
           <img
             src={episode.episode_thumbnail} 
@@ -20,6 +23,9 @@ const Episode = ({ episode }) => {
               width: "100%",
             }}
           />
+          <span className="play-icon-overlay">
+                    <FontAwesomeIcon icon={faCirclePlay} />
+                </span>
         </div>
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">{episode.title}</h5>
