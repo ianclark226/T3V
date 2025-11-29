@@ -1,12 +1,12 @@
 [
   {
     "show_id": 1,
-    "title": "Hey Arnold",
-    "poster_path": "https://m.media-amazon.com/images/S/pv-target-images/6b421dad55e6c5ef9dfd85684e7e3921790e0a51f26c6f5d3fa9c2f014e725a1._SX1080_FMjpg_.jpg",
+    "title": "Ed, Edd, n Eddy",
+    "poster_path": "https://m.media-amazon.com/images/M/MV5BOWNmY2Y0MDUtMmM4Zi00NGEzLWI1MjEtMDUzYmM2MzFjNTU2XkEyXkFqcGc@._V1_.jpg",
     "channel": [
       {
-        "channel_id": 7,
-        "channel_name": "Nickalodeon"
+        "channel_id": 6,
+        "channel_name": "Cartoon Network"
       }
     ],
     "admin_review": "I loved the acting in this movie. It was absolutely sublime!",
@@ -17,12 +17,12 @@
   },
   {
     "show_id": 2,
-    "title": "Rugrats",
-    "poster_path": "https://m.media-amazon.com/images/M/MV5BOTkwZWRjZjktMDQyMy00MjljLWIzMmMtMjc2OTNiNGY2YzkzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "title": "Recess",
+    "poster_path": "https://m.media-amazon.com/images/M/MV5BY2I4OTZhNGEtOTBmMi00ZDVjLWEzOTctOWFiOWRkMmViYTExXkEyXkFqcGc@._V1_.jpg",
     "channel": [
       {
-        "channel_id": 7,
-        "channel_name": "Nickalodeon"
+        "channel_id": 9,
+        "channel_name": "Disney"
       }
     ],
     "admin_review": "I loved the acting in this movie. It was absolutely sublime!",
@@ -50,7 +50,7 @@
   {
     "show_id": 4,
     "title": "Winx Club",
-    "poster_path": "https://static.wikia.nocookie.net/thewinx/images/4/4d/Il-destino-di-bloom.png/revision/latest?cb=20211010184200",
+    "poster_path": "https://static.wikia.nocookie.net/winxwinxclub/images/2/2a/Winx_Club_Special_1_Winx.png",
     "channel": [
       {
         "channel_id": 4,

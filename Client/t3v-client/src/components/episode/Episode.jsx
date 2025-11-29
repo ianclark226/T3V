@@ -1,8 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Episode = ({ episode }) => {
   return (
     <div className="col-md-4 mb-4">
+      <Link 
+        to={`/stream/${episode.website_id}`} 
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
       <div className="card h-100 shadow-sm">
         <div style={{ position: "relative" }}>
           <img
@@ -22,6 +27,7 @@ const Episode = ({ episode }) => {
           <p className="card-text mb-2">{episode.description}</p>
         </div>
       </div>
+      </Link>
     </div>
   );
 };

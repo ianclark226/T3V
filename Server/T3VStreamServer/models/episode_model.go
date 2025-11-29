@@ -9,4 +9,5 @@ type Episode struct {
 	Description      string `json:"description" bson:"description"`
 	AirDate          string `json:"air_date" bson:"air_date"`
 	DurationMinutes  int    `json:"duration_minutes" bson:"duration_minutes"`
+	WebsiteID        string `json:"website_id" bson:"website_id"`
 }

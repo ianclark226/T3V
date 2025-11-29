@@ -30,6 +30,7 @@ const EpisodeListPage = () => {
   }, [show_id]);
 
   if (loading) return <h2>Loading episodes...</h2>;
+  console.log("EPISODES RECEIVED:", episodes);
 
   return <EpisodeList episodes={episodes} message={message} />;
 };
