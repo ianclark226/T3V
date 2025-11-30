@@ -43,13 +43,13 @@ const Review = () => {
             const response = await axiosPrivate.patch(`/update-review/${show_id}`, { admin_review: revText.current.value });
             console.log(response.data);           
 
-            setShow(() => ({
-                ...show,
-                admin_review: response.data?.admin_review ?? show.admin_review,
-                ranking: response.data?.ranking_name
-        ? { ranking_name: response.data?.ranking_name }
-        : prev.ranking ?? null
-            }));
+            setShow(prev => ({
+    ...prev,
+    admin_review: response.data?.admin_review ?? prev.admin_review,
+    ranking: response.data?.ranking_name 
+        ? { ranking_name: response.data.ranking_name }
+        : prev.ranking ?? null,
+}));
 
         } catch (err) {
             console.error(err);
