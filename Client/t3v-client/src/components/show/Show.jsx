@@ -37,10 +37,10 @@ const Show = ({show, updateShowReview}) => {
                 <h5 className="card-title">{show?.title ?? ""} </h5>
             </div>
             {show.ranking?.ranking_name && (
-                <span className="badge bg-dark m-3 p-2" style={{fontSize:"1rem"}}>
-                    {show.ranking.ranking_name}
-                </span>
-            )}
+  <span className="badge bg-dark m-3 p-2" style={{fontSize:"1rem"}}>
+    {show.ranking?.ranking_name}
+  </span>
+)}
             {updateShowReview && (
                 <Button
                 variant='outline-info'
