@@ -24,7 +24,7 @@ const Show = ({show, updateShowReview}) => {
     <div className="col-md-4 mb-4">
         <div className="card h-100 shadow-sm">
             <div style={{position:"relative"}}>
-                <img src={show.poster_path} alt={show.title} 
+                <img src={show?.poster_path ?? ""} alt={show.title} 
                 className="card-img-top"
                 style={{
                     objectFit: "contain",
