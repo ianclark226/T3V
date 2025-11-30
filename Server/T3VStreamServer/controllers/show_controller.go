@@ -148,6 +148,11 @@ func AdminReviewUpdate(client *mongo.Client) gin.HandlerFunc {
 			AdminReview string `json:"admin_review"`
 		}
 
+		var resp struct {
+			RankingName string `json:"ranking_name"`
+			AdminReview string `json:"admin_review"`
+		}
+
 		if err := c.ShouldBindJSON(&req); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 			return
@@ -188,10 +193,10 @@ func AdminReviewUpdate(client *mongo.Client) gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{
-			"ranking_name": sentiment,
-			"admin_review": req.AdminReview,
-		})
+		resp.RankingName = sentiment
+		resp.AdminReview = req.AdminReview
+
+		c.JSON(http.StatusOK, resp)
 	}
 }
 
