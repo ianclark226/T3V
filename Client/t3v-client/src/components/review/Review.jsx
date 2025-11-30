@@ -46,9 +46,9 @@ const Review = () => {
             setShow(() => ({
                 ...show,
                 admin_review: response.data?.admin_review ?? show.admin_review,
-                ranking: {
-                    ranking_name: response.data?.ranking_name ?? show.ranking?.ranking_name
-                }
+                ranking: response.data?.ranking_name
+        ? { ranking_name: response.data?.ranking_name }
+        : prev.ranking ?? null
             }));
 
         } catch (err) {
