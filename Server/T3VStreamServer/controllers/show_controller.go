@@ -202,6 +202,7 @@ func AdminReviewUpdate(client *mongo.Client) gin.HandlerFunc {
             "admin_review": req.AdminReview,
         })
     }
+}
 
 func GetReviewRanking(admin_review string, client *mongo.Client, c *gin.Context) (string, int, error) {
 	rankings, err := GetRankings(client, c)
