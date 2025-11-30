@@ -16,5 +16,5 @@ type Show struct {
 	PosterPath  string `json:"poster_path" bson:"poster_path"`
 	Channel       []Channel       `bson:"channel" json:"channel" validate:"required,dive"`
 	AdminReview string `json:"admin_review" bson:"admin_review"`
-	Ranking     Ranking       `bson:"ranking" json:"ranking" validate:"required"`
+	Ranking     *Ranking  `json:"ranking,omitempty" bson:"ranking,omitempty"`
 }

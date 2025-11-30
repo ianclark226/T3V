@@ -25,180 +25,183 @@ import (
 var validate = validator.New()
 
 func GetShows(client *mongo.Client) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		ctx, cancel := context.WithTimeout(c, 100*time.Second)
-		defer cancel()
+    return func(c *gin.Context) {
+        ctx, cancel := context.WithTimeout(c, 100*time.Second)
+        defer cancel()
 
-		var showCollection *mongo.Collection = database.OpenCollection("shows", client)
+        showCollection := database.OpenCollection("shows", client)
 
-		var shows []models.Show
+        findOptions := options.Find().SetProjection(bson.M{
+            "show_id":      1,
+            "title":        1,
+            "poster_path":  1,
+            "admin_review": 1,
+            "ranking":      1, // <-- IMPORTANT
+        })
 
-		cursor, err := showCollection.Find(ctx, bson.M{})
+        cursor, err := showCollection.Find(ctx, bson.M{}, findOptions)
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch shows"})
+            return
+        }
+        defer cursor.Close(ctx)
 
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch shows."})
-		}
+        var shows []models.Show
+        if err := cursor.All(ctx, &shows); err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to decode shows"})
+            return
+        }
 
-		defer cursor.Close(ctx)
-
-		if err := cursor.All(ctx, &shows); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to decode shows."})
-			return
-		}
-
-		c.JSON(http.StatusOK, shows)
-	}
-
+        c.JSON(http.StatusOK, shows)
+    }
 }
 
 func GetOneShow(client *mongo.Client) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		ctx, cancel := context.WithTimeout(c, 10*time.Second)
-		defer cancel()
+    return func(c *gin.Context) {
+        ctx, cancel := context.WithTimeout(c, 10*time.Second)
+        defer cancel()
 
-		var showCollection *mongo.Collection = database.OpenCollection("shows", client)
+        showCollection := database.OpenCollection("shows", client)
 
-		showIDStr := c.Param("show_id")
-		if showIDStr == "" {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Show ID is required."})
-			return
-		}
+        showIDStr := c.Param("show_id")
+        if showIDStr == "" {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Show ID is required"})
+            return
+        }
 
-		// Convert string to int
-		showID, err := strconv.Atoi(showIDStr)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Show ID must be a number."})
-			return
-		}
+        showID, err := strconv.Atoi(showIDStr)
+        if err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Show ID must be a number"})
+            return
+        }
 
-		var show models.Show
+        findOptions := options.FindOne().SetProjection(bson.M{
+            "show_id":      1,
+            "title":        1,
+            "poster_path":  1,
+            "admin_review": 1,
+            "ranking":      1,
+        })
 
-		err = showCollection.FindOne(ctx, bson.M{"show_id": showID}).Decode(&show)
-		if err != nil {
-			if err == mongo.ErrNoDocuments {
-				c.JSON(http.StatusNotFound, gin.H{"error": "Show not found."})
-				return
-			}
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error."})
-			return
-		}
+        var show models.Show
+        err = showCollection.FindOne(ctx, bson.M{"show_id": showID}, findOptions).Decode(&show)
 
-		c.JSON(http.StatusOK, show)
-	}
+        if err != nil {
+            if err == mongo.ErrNoDocuments {
+                c.JSON(http.StatusNotFound, gin.H{"error": "Show not found"})
+                return
+            }
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+            return
+        }
+
+        c.JSON(http.StatusOK, show)
+    }
 }
 
 func AddShow(client *mongo.Client) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		ctx, cancel := context.WithTimeout(c, 100*time.Second)
-		defer cancel()
+    return func(c *gin.Context) {
+        ctx, cancel := context.WithTimeout(c, 100*time.Second)
+        defer cancel()
 
-		var show models.Show
+        var show models.Show
 
-		if err := c.ShouldBindJSON(&show); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Input"})
-			return
-		}
+        if err := c.ShouldBindJSON(&show); err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Input"})
+            return
+        }
 
-		if err := validate.Struct(show); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Validation Failed", "details": err.Error()})
-			return
-		}
+        if err := validate.Struct(show); err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Validation Failed", "details": err.Error()})
+            return
+        }
 
-		var showCollection *mongo.Collection = database.OpenCollection("shows", client)
-		result, err := showCollection.InsertOne(ctx, show)
+        showCollection := database.OpenCollection("shows", client)
+        result, err := showCollection.InsertOne(ctx, show)
 
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to add Show"})
-			return
-		}
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to add Show"})
+            return
+        }
 
-		c.JSON(http.StatusCreated, result)
-	}
+        c.JSON(http.StatusCreated, result)
+    }
 }
 
 func AdminReviewUpdate(client *mongo.Client) gin.HandlerFunc {
-	return func(c *gin.Context) {
+    return func(c *gin.Context) {
 
-		role, err := utils.GetRoleFromContext(c)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Role not found in context"})
-			return
-		}
+        role, err := utils.GetRoleFromContext(c)
+        if err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Role not found in context"})
+            return
+        }
 
-		if role != "ADMIN" {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "User must be part of the ADMIN role"})
-			return
-		}
+        if role != "ADMIN" {
+            c.JSON(http.StatusUnauthorized, gin.H{"error": "User must be part of the ADMIN role"})
+            return
+        }
 
-		showIdStr := c.Param("show_id")
+        showIdStr := c.Param("show_id")
+        if showIdStr == "" {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Show Id required"})
+            return
+        }
 
-		if showIdStr == "" {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Show Id required"})
-			return
-		}
+        showId, err := strconv.Atoi(showIdStr)
+        if err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid show_id format"})
+            return
+        }
 
-		// Convert to int
-		showId, err := strconv.Atoi(showIdStr)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid show_id format"})
-			return
-		}
+        var req struct {
+            AdminReview string `json:"admin_review"`
+        }
 
-		var req struct {
-			AdminReview string `json:"admin_review"`
-		}
+        if err := c.ShouldBindJSON(&req); err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+            return
+        }
 
-		var resp struct {
-			RankingName string `json:"ranking_name"`
-			AdminReview string `json:"admin_review"`
-		}
+        sentiment, rankVal, err := GetReviewRanking(req.AdminReview, client, c)
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Error getting review ranking"})
+            return
+        }
 
-		if err := c.ShouldBindJSON(&req); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
-			return
-		}
+        filter := bson.M{"show_id": showId}
 
-		sentiment, rankVal, err := GetReviewRanking(req.AdminReview, client, c)
+        update := bson.M{
+            "$set": bson.M{
+                "admin_review": req.AdminReview,
+                "ranking": bson.M{
+                    "ranking_value": rankVal,
+                    "ranking_name":  sentiment,
+                },
+            },
+        }
 
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error getting review ranking"})
-			return
-		}
+        ctx, cancel := context.WithTimeout(c, 100*time.Second)
+        defer cancel()
 
-		filter := bson.M{"show_id": showId}
+        showCollection := database.OpenCollection("shows", client)
 
-		update := bson.M{
-			"$set": bson.M{
-				"admin_review": req.AdminReview,
-				"ranking": bson.M{
-					"ranking_value": rankVal,
-					"ranking_name":  sentiment,
-				},
-			},
-		}
+        result, err := showCollection.UpdateOne(ctx, filter, update)
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating show"})
+            return
+        }
 
-		ctx, cancel := context.WithTimeout(c, 100*time.Second)
-		defer cancel()
+        if result.MatchedCount == 0 {
+            c.JSON(http.StatusNotFound, gin.H{"error": "Show not found"})
+            return
+        }
 
-		var showCollection *mongo.Collection = database.OpenCollection("shows", client)
-
-		result, err := showCollection.UpdateOne(ctx, filter, update)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating show"})
-			return
-		}
-
-		if result.MatchedCount == 0 {
-			c.JSON(http.StatusNotFound, gin.H{"error": "Show not found"})
-			return
-		}
-
-		resp.RankingName = sentiment
-		resp.AdminReview = req.AdminReview
-
-		c.JSON(http.StatusOK, resp)
-	}
-}
+        c.JSON(http.StatusOK, gin.H{
+            "ranking_name": sentiment,
+            "admin_review": req.AdminReview,
+        })
+    }
 
 func GetReviewRanking(admin_review string, client *mongo.Client, c *gin.Context) (string, int, error) {
 	rankings, err := GetRankings(client, c)
