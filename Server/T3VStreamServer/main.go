@@ -38,7 +38,7 @@ func main() {
 			log.Println("Allowed Origins:", origins[i])
 		}
 	} else {
-		origins = []string{"http://localhost:5173"}
+		origins = []string{"http://localhost:5173", "https://t3-v.vercel.app"}
 		log.Panicln("Allowed Origin: http://localhost:5173")
 	}
 
