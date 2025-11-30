@@ -15,7 +15,7 @@ const Episode = ({ episode }) => {
         <div style={{ position: "relative" }}>
           <img
             src={episode.episode_thumbnail} 
-            alt={episode.title}
+            alt={episode?.title ?? ""} 
             className="card-img-top"
             style={{
               objectFit: "contain",
@@ -28,7 +28,7 @@ const Episode = ({ episode }) => {
                 </span>
         </div>
         <div className="card-body d-flex flex-column">
-          <h5 className="card-title">{episode.title}</h5>
+          <h5 className="card-title">{episode?.title ?? ""} </h5>
           <p className="card-text mb-2">Episode #{episode.episode_number}</p>
           <p className="card-text mb-2">{episode.description}</p>
         </div>
