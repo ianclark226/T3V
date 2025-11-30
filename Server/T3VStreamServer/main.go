@@ -39,7 +39,6 @@ func main() {
 		}
 	} else {
 		origins = []string{"http://localhost:5173", "https://t3-v.vercel.app"}
-		log.Panicln("Allowed Origin: http://localhost:5173")
 	}
 
 	config := cors.Config{}
