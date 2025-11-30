@@ -1,6 +1,6 @@
 import useAxiosPrivate from "../../hook/useAxiosPrivate"
 import { useEffect, useState } from "react"
-import Shows from "../show/Show"
+import Shows from "../shows/Shows"
 
 const Recommended = () => {
 
