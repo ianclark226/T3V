@@ -17,38 +17,41 @@ import StreamShow from './components/streaming/StreamShow'
 function App() {
 
   const navigate = useNavigate()
-  const {auth, setAuth} = useAuth()
+  const { auth, setAuth } = useAuth()
   const updateShowReview = (show_id) => {
-  navigate(`/review/${show_id}`)
-}
+    navigate(`/review/${show_id}`)
+  }
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
 
     try {
-      const response = await axiosConfig.post("/logout", {user_id: auth.user_id})
+      const response = await axiosConfig.post("/logout", { user_id: auth.user_id })
       console.log(response.data)
       setAuth(null)
       // localStorage.removeItem('user')
       console.log("User Logged out")
       navigate("/login")
 
-    } catch(error) {
+    } catch (error) {
       console.error("Error logging out:", error)
     }
   }
 
   return (
     <>
-    <Header handleLogout={handleLogout} />
-      <Routes path="/" element = {<Layout/>}>
-        <Route path="/" element={<Home updateShowReview={updateShowReview}/>}></Route>
-        <Route path="/register" element={<Register/>}></Route>
-        <Route path="/login" element={<Login/>}></Route>
-        <Route element = {<RequiredAuth/>}>
-            <Route path="/recommended" element={<Recommended/>}></Route>
-            <Route path="/review/:show_id" element={<Review/>}></Route>
-            <Route path="shows/:show_id/episodes" element={<EpisodeListPage/>}></Route>
-            <Route path="stream/:website_id" element={<StreamShow />} />
+      <Header handleLogout={handleLogout} />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home updateShowReview={updateShowReview} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+
+          <Route element={<RequiredAuth />}>
+            <Route path="/recommended" element={<Recommended />} />
+            <Route path="/review/:show_id" element={<Review />} />
+            <Route path="/shows/:show_id/episodes" element={<EpisodeListPage />} />
+            <Route path="/stream/:website_id" element={<StreamShow />} />
+          </Route>
         </Route>
       </Routes>
 
