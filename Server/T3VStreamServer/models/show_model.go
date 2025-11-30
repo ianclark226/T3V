@@ -14,7 +14,7 @@ type Show struct {
 	ShowID      int    `json:"show_id" bson:"show_id"`
 	Title       string `json:"title" bson:"title"`
 	PosterPath  string `json:"poster_path" bson:"poster_path"`
-	Channel       []Channel       `bson:"channel" json:"channel" validate:"required,dive"`
+	Channel []Channel  `bson:"channel,omitempty" json:"channel,omitempty"`
 	AdminReview string `json:"admin_review" bson:"admin_review"`
 	Ranking     *Ranking  `json:"ranking,omitempty" bson:"ranking,omitempty"`
 }
