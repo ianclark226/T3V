@@ -1,6 +1,6 @@
 module github.com/ianclark226/T3V/Server/T3VStreamServer
 
-go 1.25.2
+go 1.25.0
 
 require go.mongodb.org/mongo-driver v1.17.4
 
