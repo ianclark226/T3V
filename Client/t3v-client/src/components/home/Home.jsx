@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import axiosConfig from "../../api/axiosConfig"
-import Shows from "../shows/shows"
+import Shows from "../show/Show"
 
 const Home = ({updateShowReview}) => {
     const [shows, setShows] = useState([])
